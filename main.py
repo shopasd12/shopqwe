@@ -58,15 +58,18 @@ class TicketView(View):
     def __init__(self):
         super().__init__()
 
+        # เพิ่มปุ่มเปิดตั๋ว
         self.open_ticket_button = Button(label="🤍เปิดตั๋วคุยแอดมิน❤", style=discord.ButtonStyle.green)
-        self.open_ticket_button.callback = self.open_ticket
+        self.open_ticket_button.callback = self.open_ticket  # ตั้งค่า callback ให้ฟังก์ชัน open_ticket
         self.add_item(self.open_ticket_button)
 
+        # เพิ่มปุ่มแจ้งปัญหา
         self.report_issue_button = Button(label="🍤แจ้งปัญหา🔞", style=discord.ButtonStyle.blurple)
-        self.report_issue_button.callback = self.report_issue
+        self.report_issue_button.callback = self.report_issue  # ตั้งค่า callback ให้ฟังก์ชัน report_issue
         self.add_item(self.report_issue_button)
 
     async def open_ticket(self, interaction: discord.Interaction, button: discord.ui.Button):
+        # ฟังก์ชันเปิดตั๋ว
         user_id = interaction.user.id
         user_name = interaction.user.name
 
@@ -109,6 +112,7 @@ class TicketView(View):
         await interaction.response.send_message("❄🧊คุณได้เปิดตั๋วแล้ว! รอแอดมินตอบกลับ🧊", ephemeral=True)
 
     async def report_issue(self, interaction: discord.Interaction, button: discord.ui.Button):
+        # ฟังก์ชันแจ้งปัญหา
         modal = IssueReportModal()
         await interaction.response.send_modal(modal)
 
